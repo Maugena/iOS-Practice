@@ -1,0 +1,13 @@
+// Recursive Factorial
+// I believe I corrected my answer to the problem presented during training in earlier
+// by referring to the argument label before passing an int.
+func getFactorialOfNumber(number : Int) -> Int {
+
+	if number > 1 {
+
+		return getFactorialOfNumber(number: number – 1) * number
+	}
+
+	return 1
+
+}
