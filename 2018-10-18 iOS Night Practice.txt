@@ -1,0 +1,86 @@
+class Schedule {
+
+	var startDay: Int
+	var startMonth: String
+	var startYear: Int
+
+	init(startDay: Int, startMonth: String, startYear: Int){
+		self.startDay = startDay
+		self.startMonth = startMonth
+		self.startYear = startYear
+	}
+
+	deinit {
+		print("This Schedule class is now about to deallocate.")
+	}
+}
+
+class ClassSchedule: Schedule { // showing inheritance
+
+	var className: String
+
+	init(className: String, startDay: Int, startMonth: String, startYear: Int){
+		self.className = className
+		self.startDay = startDay
+		self.startMonth = startMonth
+		self.startYear = startYear
+	}
+}
+
+var firstSchedule : Schedule? = Schedule(startDay: 17, startMonth: "October", startYear: 2018)
+var secondSchedule : firstSchedule
+print("First schedule: \(firstSchedule.startDay)/\(firstSchedule.startMonth)/\(firstSchedule.startYear)")
+print("Second schedule was passed by reference and should be the same as the first schedule.")
+print("Second schedule: \(secondSchedule.startDay)/\(secondSchedule.startMonth)/\(secondSchedule.startYear)")
+firstSchedule.startDay = 12
+print("Only the first schedule's start day was changed but both will have changed since they are both referencing the same data location.")
+print("Second schedule: \(secondSchedule.startDay)/\(secondSchedule.startMonth)/\(secondSchedule.startYear)")
+print("We will now dereference the object from the first schedule. I do not believe that will cause the object to deallocate because it still has one reference from the second schedule.")
+firstSchedule = nil
+print("I will now dereference the object from the second schedule which I believe will cause the object to deallocate and call the deinitialization.")
+secondSchedule = nil
+print("Now both references to the object have been removed.")
+
+struct Employees {
+
+	private var names: [String] = ["Andrew Bailey", "Fred Jones"]
+	
+	subscript (employeeIndex: Int) -> String {
+		get {
+			return names[employeeIndex]
+		}
+		set (newValue){
+			if newValue >= 0 && newValue < names.count {
+				names[employeeIndex] = newValue
+			}
+		}
+	}
+}
+	
+var firstEmployeeArray = Employee()
+print("First array employees, \(firstEmployeeArray[0]) and \(firstEmployeeArray[1])")
+var secondEmployeeArray = firstEmployee
+print("Second array employees, \(secondEmployeeArray[0]) and \(firstEmployeeArray[1])")
+firstEmployeeArray[0] = "John Smith"
+print("First array employees, \(firstEmployeeArray[0]) and \(firstEmployeeArray[1])")
+// only the first reference should have changed their first element because structs are pass by value
+
+
+struct AdditionExample {
+
+	private var text: String
+
+	subscript(addition: String) -> String {
+		return text + addition
+	}
+}
+
+var addition = AdditionExample(text: "Hello there, ")
+print(addition[""])
+var greeting = addition["Andrew"]
+print(greeting)
+
+
+
+
+
